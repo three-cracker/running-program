@@ -1,0 +1,17 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+html{
+    font-size: calc(100vw / 10);
+}
+.container{
+    /*相当于屏幕宽度的75%*/
+    width: 10rem;
+    height: 100vh;
+    /*相当于14px*/
+    font-size: .5rem;
+    /*background-color: #42b983;*/
+}
