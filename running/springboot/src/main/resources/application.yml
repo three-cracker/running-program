@@ -1,0 +1,23 @@
+sky:
+  alioss:
+    endpoint: xxxx
+    accessKeyId: xxxx
+    accessKeySecret: xxxxx
+    bucketName: xxxxxxx
+  jwt:
+    user-secret-key: itheima
+    user-ttl: 7200000
+    user-token-name: authentication
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/running?serverTimezone=UTC
+    username: root
+    password: 123456
+
+server:
+  port: 8081
+
+mybatis-plus:
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
