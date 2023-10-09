@@ -1,6 +1,10 @@
 package com.example.springboot.controller;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.springboot.common.BaseContext;
 import com.example.springboot.domain.entity.Comment;
+import com.example.springboot.domain.entity.User;
 import com.example.springboot.domain.result.Result;
 import com.example.springboot.mapper.CommentMapper;
 import com.example.springboot.service.CommentService;
@@ -38,5 +42,12 @@ public class CommentController {
 
         commentMapper.deleteById(id);
         return Result.success();
+    }
+
+    //删除评论
+    @GetMapping("/{activityId}")
+    public Result<Comment> getCommentByActivityId(@PathVariable Long activityId){
+        Comment comment = commentService.getCommentByActivityId(activityId);
+        return Result.success(comment);
     }
 }

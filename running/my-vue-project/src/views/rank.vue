@@ -60,13 +60,7 @@ export default {
   name: "rank",
   data(){
     return{
-      user:{
-        id:1,
-        username:'ada',
-        rank:'第2名',
-        score:100,
-        imgSrc:'https://www.gxqfsxx.com/Public/chatu/9.jpg'
-      },
+      user:localStorage.getItem("current-user") ? JSON.parse(localStorage.getItem("current-user")) : {},
       currentDate:'',
       tableData:[
         {
@@ -78,9 +72,9 @@ export default {
     }
   },
   created() {
-    this.user = JSON.parse(localStorage.getItem("current-user"))
     this.getCurrentDate()
     this.getRank()
+    this.isLogin()
   },
   methods:{
     getCurrentDate(){
@@ -103,7 +97,22 @@ export default {
       }).catch(reason => {
         console.log(reason)
       })
-    }
+    },
+    isLogin(){
+      if (Object.keys(this.user).length === 0){
+        this.$confirm('还未登录，请立即登录', "提示", {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+        }).then(()=>{
+          this.$router.push('/login')
+        }).catch(()=>{
+          this.$message({
+            type: 'info',
+            message: '取消登录'
+          });
+        });
+      }
+    },
   },
   mounted() {
 

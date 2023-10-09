@@ -44,9 +44,7 @@ export default {
   name: "Activity",
   data(){
     return{
-      user:{
-
-      },
+      user:localStorage.getItem("current-user") ? JSON.parse(localStorage.getItem("current-user")) : {},
       textarea:'',
       activity_ids:[],
       activities:[
@@ -68,7 +66,7 @@ export default {
     }
   },
   created() {
-    this.user = JSON.parse(localStorage.getItem("current-user"))
+
   //   通过user_id查找activity_id来查找activities
     axios.get('http://localhost:8081/user/activity/' + this.user.id,
         {

@@ -4,20 +4,17 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 
- * @TableName activity
+ * @TableName user_activity_realtion
  */
-@TableName(value ="activity")
+@TableName(value ="user_activity_realtion")
 @Data
-public class Activity implements Serializable {
+public class UserActivityRealtion implements Serializable {
     /**
      * 
      */
@@ -27,18 +24,12 @@ public class Activity implements Serializable {
     /**
      * 
      */
-    private String activityName;
+    private Long userId;
 
     /**
      * 
      */
-    private String location;
-
-    /**
-     * 
-     */
-    @JsonFormat(pattern = "yyyy-MM-DD HH:mm:ss")
-    private Date time;
+    private Long activityId;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -54,11 +45,10 @@ public class Activity implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Activity other = (Activity) that;
+        UserActivityRealtion other = (UserActivityRealtion) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getActivityName() == null ? other.getActivityName() == null : this.getActivityName().equals(other.getActivityName()))
-            && (this.getLocation() == null ? other.getLocation() == null : this.getLocation().equals(other.getLocation()))
-            && (this.getTime() == null ? other.getTime() == null : this.getTime().equals(other.getTime()));
+            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getActivityId() == null ? other.getActivityId() == null : this.getActivityId().equals(other.getActivityId()));
     }
 
     @Override
@@ -66,9 +56,8 @@ public class Activity implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getActivityName() == null) ? 0 : getActivityName().hashCode());
-        result = prime * result + ((getLocation() == null) ? 0 : getLocation().hashCode());
-        result = prime * result + ((getTime() == null) ? 0 : getTime().hashCode());
+        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getActivityId() == null) ? 0 : getActivityId().hashCode());
         return result;
     }
 
@@ -79,9 +68,8 @@ public class Activity implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", activityName=").append(activityName);
-        sb.append(", location=").append(location);
-        sb.append(", time=").append(time);
+        sb.append(", userId=").append(userId);
+        sb.append(", activityId=").append(activityId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

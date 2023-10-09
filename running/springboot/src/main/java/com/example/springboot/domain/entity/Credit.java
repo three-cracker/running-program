@@ -17,7 +17,7 @@ public class Credit implements Serializable {
     /**
      * 积分id
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**

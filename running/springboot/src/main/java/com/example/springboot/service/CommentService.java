@@ -22,4 +22,6 @@ public interface CommentService extends IService<Comment> {
      * @param
      */
     void updateComment(Comment comment);
+
+    Comment getCommentByActivityId(Long activityId);
 }

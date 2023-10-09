@@ -1,5 +1,6 @@
 package com.example.springboot.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.springboot.common.BaseContext;
 import com.example.springboot.domain.entity.Comment;
@@ -46,6 +47,14 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
     public void updateComment(Comment comment) {
         comment.setUpdateTime(LocalDateTime.now());
         commentMapper.updateById(comment);
+    }
+
+    public Comment getCommentByActivityId(Long activityId) {
+        QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("activity_id", activityId);
+        queryWrapper.eq("user_Id", BaseContext.getCurrentId());
+        Comment comment = commentMapper.selectOne(queryWrapper);
+        return comment;
     }
 
 

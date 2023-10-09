@@ -8,12 +8,15 @@ sky:
     user-secret-key: itheima
     user-ttl: 7200000
     user-token-name: authentication
+  baidu:
+    ak: bmvg8yeOopwOB4aHl5uvx52rgIa3VrPO
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/running?serverTimezone=UTC
-    username: shan
-    password: shan
+    username: root
+    password: 123456
+
 
 server:
   port: 8081

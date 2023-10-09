@@ -69,7 +69,6 @@ export default {
     sign() {
       const location = localStorage.getItem("location")
       const username = this.user.username
-
       axios.post("/sign", { user: username, location: location }).then(res => {
         if (res.code === 1) {
           this.$message.success("打卡成功"),
