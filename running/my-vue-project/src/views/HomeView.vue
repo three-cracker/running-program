@@ -14,6 +14,7 @@
         </template>
       </el-footer>
     </el-container>
+
   </div>
 </template>
 
@@ -27,6 +28,8 @@ export default {
   },
   data() {
     return {
+
+      user: localStorage.getItem("current-user") ? JSON.parse(localStorage.getItem("current-user")) : {},
       activeName: 'home',
       tabs: [
         { label: '首页', name: 'home' },
@@ -38,7 +41,7 @@ export default {
   methods: {
     handleClick(tab, event) {
       this.$router.push({ path: tab.name });
-    }
+    },
   },
   mounted() {
     this.activeName = this.$router.currentRoute.name
@@ -47,6 +50,8 @@ export default {
     // console.log(this.$router.currentRoute.fullPath) /rank
     // console.log(this.$route.path) /rank
     // console.log(this.$route.fullPath) /rank
+  },
+  created() {
   }
 }
 </script>

@@ -27,8 +27,10 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
       // 这是登录表单数据绑定对象
@@ -44,6 +46,7 @@ export default {
           {required:true,message:'请输入密码',trigger:'blur'},
         ]
       }
+
     }
 
   },
@@ -52,7 +55,27 @@ export default {
     register() {
       this.$refs.registerFormRef.validate(async valid => {
         // console.log(valid);
-        if (!valid) return;
+        if (valid){
+          axios.post("http://localhost:8081/user/register", {
+                username:this.user.username,
+                password:this.user.password
+              },
+              {
+                headers:{
+                  'Content-Type':'application/json'
+                }
+              }).then(res=>{
+              if (res.data.code === 1){
+                this.$router.push('/login')
+                this.$message.success('注册成功');
+              }
+              else{
+                this.$message.error(res.data.msg)
+              }
+          })
+        }
+
+
       })
     }
   }

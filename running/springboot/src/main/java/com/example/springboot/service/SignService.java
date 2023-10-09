@@ -1,7 +1,7 @@
 package com.example.springboot.service;
 
+import cn.hutool.crypto.asymmetric.Sign;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.springboot.domain.entity.Sign;
 import org.springframework.stereotype.Service;
 
 @Service

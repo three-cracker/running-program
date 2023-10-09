@@ -12,9 +12,10 @@ public interface CommentService extends IService<Comment> {
 
     /**
      * 发表评论
-     * @param content
+     *
+     * @param comment
      */
-    Comment addComment(String content,Long postId);
+    Comment addComment(Comment comment);
 
     /**
      * 更新评论

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user/comments")
+@CrossOrigin(origins="http://localhost:8080",allowCredentials = "true")
 public class CommentController {
     @Autowired
     private CommentService commentService;
@@ -18,8 +19,7 @@ public class CommentController {
     @PostMapping
     public Result addComment(@RequestBody Comment comment){
 
-
-        commentService.addComment(comment.getContent(),comment.getPostId());
+        commentService.addComment(comment);
         return Result.success();
     }
 

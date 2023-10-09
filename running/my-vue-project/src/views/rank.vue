@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "rank",
   data(){
@@ -75,6 +77,11 @@ export default {
       ]
     }
   },
+  created() {
+    this.user = JSON.parse(localStorage.getItem("current-user"))
+    this.getCurrentDate()
+    this.getRank()
+  },
   methods:{
     getCurrentDate(){
       let nowDate = new Date()
@@ -84,10 +91,22 @@ export default {
         date: nowDate.getDate()
       }
       this.currentDate = date.year + '-' + date.month + '-' + date.date
+    },
+    getRank(){
+      axios.get('http://localhost:8081/user/credit').then(res =>{
+        if (res.data.code==1){
+
+        }
+        else{
+          console.log(res.data)
+        }
+      }).catch(reason => {
+        console.log(reason)
+      })
     }
   },
   mounted() {
-    this.getCurrentDate()
+
   }
 }
 </script>

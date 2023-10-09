@@ -31,4 +31,12 @@ public interface UserService extends IService<User> {
      * @return
      */
     User searchCurrent();
+
+    /**
+     * 更新当前用户信息
+     * @param user
+     * @param loginUser
+     * @return
+     */
+    int updateUser(User user, User loginUser);
 }

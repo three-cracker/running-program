@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Login",
   data() {
@@ -52,18 +54,54 @@ export default {
     login() {
       this.$refs.loginFormRef.validate(async valid => {
         // console.log(valid);
-        if (!valid) return;
+        if (valid){
+          //   验证通过
+          axios.post("http://localhost:8081/user/login",
+              {
+                username:this.user.username,
+                password:this.user.password
+              },
+              {
+                headers:{
+                  'Content-Type':'application/json'
+                }
+              }).then(res =>{
+            //   当后台返回的code是200的时候，表示验证通过
+            //   这时候要存储用户信息，然后跳转到主页
+            console.log(res.data)
+            if (res.data.code === 1){
+              this.$router.push('/home')
+              this.$message.success('登录成功');
+              localStorage.setItem('current-user',JSON.stringify(res.data.data)) //存储用户信息，使用json形式存储
+            }
+            else{
+              this.$message.error(res.data.msg)
+            }
+
+          })
+        }
+
       })
-    }
+    },
+
   },
   mounted() {
     // 获取地理位置
+    // var geolocation = new BMapGL.Geolocation();
+    // geolocation.getCurrentPosition(function (r) {
+    //   if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+    //     const province = r.address.province;
+    //     const city = r.address.city;
+    //     localStorage.setItem("location", province + city);
+    //   }
+    // });
+    // 获取地理位置
     var geolocation = new BMapGL.Geolocation();
-    geolocation.getCurrentPosition(function (r) {
-      if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-        const province = r.address.province;
-        const city = r.address.city;
-        localStorage.setItem("location", province + city);
+    geolocation.getCurrentPosition(function(r){
+      if(this.getStatus() == BMAP_STATUS_SUCCESS){
+        const province = r.address.province
+        const city = r.address.city
+        localStorage.setItem("location", province + city)
       }
     });
   },

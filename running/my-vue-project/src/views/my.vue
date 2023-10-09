@@ -2,7 +2,7 @@
   <div>
     <div style="height: 20vh;display: flex;align-items: center;justify-content: center;flex-direction: column" class="container">
       <div style="font-size: 20px;margin:20px 0">我的</div>
-      <div v-if="user" >
+      <div v-if="Object.keys(user).length === 0" >
         <button style="padding: 8px 25px;margin-bottom:15px;border-radius: 3px;background-color: transparent;color: #e7e5e5;border: 1px solid #eee" @click="$router.push('/login')">立即登录</button>
         <div style="font-size: 14px;color: #e7e5e5">你还未登录，请立即登录</div>
       </div>
@@ -18,7 +18,7 @@
         </div>
       </el-card>
       <el-card class="box-card">
-        <div class="text item"  @click="$router.push('/activity')">
+        <div class="text item"  @click="linkToActivity">
           <i class="el-icon-s-flag" style="padding-right: 5px;"></i><span>我的活动</span>
           <span style="float: right; "><i class="el-icon-arrow-right"></i></span>
         </div>
@@ -57,15 +57,32 @@ export default {
   name: "my",
   data(){
     return{
-      user:{
-        imgSrc:'https://www.gxqfsxx.com/Public/chatu/9.jpg',
-      }
+      user:localStorage.getItem("current-user") ? JSON.parse(localStorage.getItem("current-user")) : {},
     }
   },
   methods:{
     loginOut(){
       localStorage.removeItem("current-user");
       this.$router.push("/login")
+    },
+    linkToActivity(){
+      if (Object.keys(this.user).length === 0){
+        this.$confirm('还未登录，请立即登录', "提示", {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+        }).then(()=>{
+          this.$router.push('/login')
+        }).catch(()=>{
+          this.$message({
+            type: 'info',
+            message: '取消登录'
+          });
+        });
+      }
+      else{
+        this.$router.push('/activity')
+      }
+
     }
   }
 }

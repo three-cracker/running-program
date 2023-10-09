@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.cglib.core.Local;
 
@@ -51,11 +52,13 @@ public class User implements Serializable {
     /**
      * 
      */
+    @JsonFormat(pattern = "yyyy-MM-DD HH:mm:ss")
     private LocalDateTime createTime;
 
     /**
      * 管理员者1 普通用户0
      */
+    @JsonFormat(pattern = "yyyy-MM-DD HH:mm:ss")
     private Boolean status;
 
     @TableField(exist = false)

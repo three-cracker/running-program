@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -31,6 +32,11 @@ public class Comment implements Serializable {
     /**
      *
      */
+    private Long activityId;
+
+    /**
+     *
+     */
     private Long postId;
     /**
      * 
@@ -40,11 +46,13 @@ public class Comment implements Serializable {
     /**
      * 
      */
+    @JsonFormat(pattern = "yyyy-MM-DD HH:mm:ss")
     private LocalDateTime createTime;
 
     /**
      * 
      */
+    @JsonFormat(pattern = "yyyy-MM-DD HH:mm:ss")
     private LocalDateTime updateTime;
 
     @TableField(exist = false)

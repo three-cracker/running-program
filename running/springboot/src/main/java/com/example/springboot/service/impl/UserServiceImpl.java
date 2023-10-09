@@ -109,6 +109,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
 
     }
+
+    /**
+     * 更新当前用户信息
+     * @param user
+     * @param loginUser
+     * @return
+     */
+    public int updateUser(User user, User loginUser) {
+        Long userId = user.getId();
+            if (userId <= 0) {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            }
+            // 2. 校验权限
+            // 2.1 管理员可以更新任意信息
+            // 2.2 用户只能更新自己的信息
+            if ( !userId.equals(loginUser.getId())) {
+                throw new BusinessException(ErrorCode.NO_AUTH);
+        }
+        User oldUser = this.getById(user.getId());
+        if (oldUser == null) {
+            throw new BusinessException(ErrorCode.NULL_ERROR);
+        }
+        // 3. 触发更新
+        return this.baseMapper.updateById(user);
+    }
 }
 
 

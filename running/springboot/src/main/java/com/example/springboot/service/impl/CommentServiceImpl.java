@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ConcurrentModificationException;
 
 /**
  * @author 小拼音胖木木
@@ -25,16 +24,16 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
     /**
      * 发表评论
      *
-     * @param content
+     * @param comment
      */
-    public Comment addComment(String content, Long postId) {
-        //补全作者+时间
-        Comment comment = new Comment();
+    public Comment addComment(Comment comment) {
+        //补全作者+时间+活动
         comment.setUserId(BaseContext.getCurrentId());
         comment.setCreateTime(LocalDateTime.now());
         comment.setUpdateTime(LocalDateTime.now());
-        comment.setPostId(postId);
-        comment.setContent(content);
+        comment.setPostId(comment.getPostId());
+        comment.setContent(comment.getContent());
+        comment.setActivityId(comment.getActivityId());
         this.save(comment);
         return comment;
     }
